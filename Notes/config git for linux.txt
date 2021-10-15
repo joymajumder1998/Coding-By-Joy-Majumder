@@ -4,4 +4,4 @@ git config --global user.password "password" // Password or authentication token
 
 -------------------------------------------------
 
-
+git config --global credential.helper cache // Write this command if you don't want to type credentials every time
