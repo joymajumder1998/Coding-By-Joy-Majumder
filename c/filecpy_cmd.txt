@@ -1,0 +1,24 @@
+#include<stdio.h>
+
+int main(int argc,char *argv[])
+{
+	FILE *r,*w;
+	char ch;
+	if(argc!=3)
+	{
+		printf("\nInsufficient argument");
+		return 0;
+	}
+	r=fopen(argv[1],"r");
+	w=fopen(argv[2],"w");
+	ch=fgetc(r);
+	while(ch!=EOF)
+	{
+		putc(ch,w);
+		ch=fgetc(r);
+	}
+	printf("\nFile copied successfully");
+	fclose(w);
+	fclose(r);
+	return 0;
+}	

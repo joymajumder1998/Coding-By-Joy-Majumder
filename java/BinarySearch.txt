@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+class Array
+{
+		int arr[];
+		private void search(int first,int last,int k)
+		{
+			if(first>last)
+			{
+				System.out.println("\nElement does not exist"); 
+				return;
+			}
+			int mid=(first+last)/2;
+			if(arr[mid]==k)
+			{
+				System.out.println("\nElement present at position "+(mid+1)); 
+				return;
+			}
+			else if(k>arr[mid])
+				search(mid+1,last,k);
+			else
+				search(first,mid-1,k);
+		}
+		void getData()
+		{
+			System.out.println("\nEnter the size of the array : ");
+			Scanner input=new Scanner(System.in);
+			int size=input.nextInt();
+			arr=new int[size];
+			System.out.println("\nEnter the elements : ");
+			for(int i=0;i<size;i++)
+				arr[i]=input.nextInt();
+			System.out.println("\nEnter the value which you want to search : ");
+			int k=input.nextInt();
+			System.out.println("\nBefore sorting : ");
+			for(int i=0;i<size;i++)
+				System.out.print(" "+arr[i]);
+			search(0,size-1,k);
+			return;
+		}
+};
+
+class BinarySearch
+{
+	public static void main(String args[])
+	{
+			Array A=new Array();
+			A.getData();
+			return;
+	}
+};
+

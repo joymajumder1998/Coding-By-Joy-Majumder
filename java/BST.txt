@@ -1,0 +1,73 @@
+import java.util.Scanner;
+import java.io.*;
+
+class BST
+{
+	static class Node
+	{
+		int info;
+		Node left,right;
+		Node(int x)
+		{
+			info=x;
+			left=null;
+			right=null;
+		}
+	}
+
+	static Node Root=null;
+	
+	static void insert(int x)
+	{
+		Node Current=Root,Parent=Root;
+		Node Temp=new Node(x);
+		if(Root==null)
+		{
+			Root=Temp;
+			return;
+		}
+		while(Current!=null)
+		{
+			Parent=Current;
+			if(x==Current.info)
+			{
+				System.out.print("\n"+x+"Already present");
+				break;
+			}
+			else if(x<Parent.info)
+				Current=Current.left;
+			else
+				Current=Current.right;
+		}
+		if(x<Parent.info)
+			Parent.left=Temp;
+		else
+			Parent.right=Temp;
+	}
+
+	static void inorder(Node Ptr)
+	{
+		if(Ptr==null)
+			return;
+		inorder(Ptr.left);
+		System.out.print(" "+Ptr.info);
+		inorder(Ptr.right);
+	}
+
+	public static void main(String args[])
+	{
+		Scanner input=new Scanner(System.in);
+		BST T=new BST();
+		int n,x;
+		System.out.print("\nEnter the number of elements : ");
+		n=input.nextInt();
+		for(int i=0;i<n;i++)
+		{
+			System.out.printf("\nEnter %d TH element : ",i+1);
+			x=input.nextInt();
+			T.insert(x);
+		}
+		T.inorder(Root);
+		return;
+	}
+};

@@ -1,0 +1,14 @@
+echo Enter 1st number : 
+read a
+echo Enter 2nd number :
+read b
+while [ $a -ne $b ]
+do
+	if [ $a -gt $b ]
+	then
+		a=`echo "$a-$b"|bc`
+	else
+		b=`echo "$b-$a"|bc`
+	fi
+done
+echo The gcd is $a

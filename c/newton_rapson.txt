@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<math.h>
+
+#define f(x) sqrt(x)
+#define df(x) 1/(2*sqrt(x))
+
+int main()
+{
+	int n=0;
+	float xn,fx,dfx,h,x,temp,a,b;
+	printf("\nEquation is sqrt(x)");
+	printf("\nEnter the value of a and b : ");
+	scanf("%f%f",&a,&b);
+	if(f(a)*f(b) >= 0)
+		printf("\nNo roots belongs between %f and %f",a,b);
+	else
+	{
+		x=a;
+		printf("\n----------------------------------------------------------------------------");
+		printf("\n  n       xn       f(xn)       f'(xn)       hn=-f(xn)/f'(xn)      xn+1=xn+hn");
+		printf("\n----------------------------------------------------------------------------");
+		do
+		{
+			fx=f(x);
+			dfx=df(x);
+			h=-1*(fx/dfx);
+			xn=h+x;
+			printf("\n%3d%9f%12f%13f%23f%16f",n++,x,fx,dfx,h,xn);
+			temp=x;
+			x=xn;
+		}while(temp!=x);
+		printf("\n----------------------------------------------------------------------------");
+		printf("\nThe root is %f",x);
+	}
+	return 0;
+}

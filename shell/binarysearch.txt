@@ -1,0 +1,49 @@
+search()
+{
+	l=$1
+	u=$2
+	mid=`echo "$l+$u"|bc`
+	mid=`echo "$mid/2"|bc`
+	if [ ${a[$mid]} -eq $x ]
+	then
+		f=$mid
+		return
+	elif [ $l -eq $u ]
+	then
+		echo Element does not exist
+		return
+	else
+		if [ $x -gt ${a[$mid]} ]
+		then
+			l=`echo "$mid+1"|bc`
+			search $l $u
+		else
+			u=`echo "$mid-1"|bc`
+			search $l $u
+		fi
+	
+	fi
+	
+}
+
+echo Enter the number of elements : 
+read n
+i=1
+echo Enter the elements :
+while [ $i -le $n ]
+do
+	read a[$i]
+	i=`echo "$i+1"|bc`
+done
+echo Array is : ${a[*]}
+echo Enter the element which you want to search :
+read x
+s=1
+e=$n
+f=0
+search $s $e
+if [ $f -ne 0 ]
+then
+	echo Element present at : $f
+fi
+

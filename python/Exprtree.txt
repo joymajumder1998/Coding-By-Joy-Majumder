@@ -1,0 +1,63 @@
+class Node:
+	def __init__(self,data):
+		self.data=data
+		self.left,self.right=None,None
+
+class Tree:
+	def __init__(self):
+		self.Root=None
+	
+	def mkTree(self,s):
+		l=len(s)
+		Ptr1=Node(s[0])
+		Ptr2=Node(s[1])
+		Ptr3=Node(s[2])
+		Ptr3.left=Ptr1
+		Ptr3.right=Ptr2
+		self.Root=Ptr3
+		i=3
+		while i<l:
+			Ptr1=Ptr3
+			Ptr2=Node(s[i])
+			i=i+1
+			Ptr3=Node(s[i])
+			i=i+1
+			Ptr3.left=Ptr1
+			Ptr3.right=Ptr2
+			self.Root=Ptr3
+		
+	def inorder(self,Ptr):
+		if Ptr==None:
+			return
+		self.inorder(Ptr.left)
+		print(Ptr.data,end=' ')
+		self.inorder(Ptr.right)
+
+	def eval(self,Ptr):
+		if Ptr==None:
+			return 0
+		if Ptr.left==None and Ptr.right==None:
+			return int(Ptr.data)
+		left=self.eval(Ptr.left)
+		right=self.eval(Ptr.right)
+		if Ptr.data=='+':
+			return left+right
+		if Ptr.data=='-':
+			return left-right
+		if Ptr.data=='*':
+			return left*right
+		if Ptr.data=='/':
+			return left/right
+
+	def display(self):
+		if self.Root==None:
+			print("Tree is empty")
+		else:
+			print("Infix expression is : ",end=' ')
+			self.inorder(self.Root)
+			print("\nValue of the tree is : ",self.eval(self.Root))
+	
+n=str(input("Enter a postfix expression : "))
+T=Tree()
+T.mkTree(n)
+T.display()

@@ -1,0 +1,10 @@
+a=input().split(" ")
+for i in range(len(a)):
+	a[i]=int(a[i])
+small=min(a)
+big=max(a)
+a.remove(small)
+a.remove(big)
+small=min(a)
+big=max(a)
+print(big,small)

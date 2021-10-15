@@ -1,0 +1,38 @@
+class Graph:
+	def __init__(self,number):
+		self.number=number
+		self.adj=[[[]for i in range(0,number)]for j in range(0,number)]
+		self.visit=[None]*self.number
+		for i in range(0,self.number):
+			self.visit[i]=True
+	
+	def getEdge(self):
+		print("Enter adjacency  matrix : ")
+		for i in range(0,self.number):
+			for j in range(0,self.number):
+				print("Enter Adj[",i,"][",j,"] : ")
+				self.adj[i][j]=int(input())
+	def display(self):
+		print("Adjancecy matrix is : ")
+		for i in range(0,self.number):
+			for j in range(0,self.number):
+				print(self.adj[i][j],end=' ')
+			print("")
+
+	def DFS(self,v):
+		self.visit[v]=False
+		for i in range(0,self.number):
+			if self.adj[v][i]==1 and self.visit[i]==True:
+				print("(",v,",",i,")")
+				self.DFS(i)
+
+n=int(input("Enter the number of vertices : "))
+G=Graph(n)
+G.getEdge()
+G.display()
+x=int(input("Enter the starting vertex : "))
+if x<0 or x>n-1:
+	print("DFS not possible from ",x)
+	exit()
+print("DFS traversal is : ")
+G.DFS(x)

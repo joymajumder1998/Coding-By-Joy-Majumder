@@ -1,0 +1,17 @@
+fact()
+{
+	n=$1
+	if [ $n -eq 0 ]
+	then 
+		return
+	fi
+	n1=`echo "$n-1"|bc`
+	f=`echo "$f*$n"|bc`
+	fact $n1
+}
+
+echo Enter a number : 
+read x
+f=1
+fact $x
+echo $f

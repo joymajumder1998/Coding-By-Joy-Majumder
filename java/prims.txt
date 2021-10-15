@@ -1,0 +1,80 @@
+import java.util.Scanner;
+
+class Graph
+{
+	static int cost[][],number;
+	static boolean visit[];
+	static Scanner input=new Scanner(System.in);
+	Graph(int x)
+	{
+		number=x;
+		visit=new boolean[number];
+		cost=new int[number][number];
+		for(int i=0;i<number;i++)
+			visit[i]=true;
+	}
+	
+	void getData()
+	{
+		System.out.print("\nEnter the cost matrix :- ");
+		for(int i=0;i<number;i++)
+		{
+			System.out.print("\nEnter "+(i+1)+" TH row : ");
+			for(int j=0;j<number;j++)
+				cost[i][j]=input.nextInt();
+		}
+	}
+
+	void display()
+	{
+		System.out.print("\nThe cost matrix is : ");
+		for(int i=0;i<number;i++)
+		{
+			System.out.printf("\n");
+			for(int j=0;j<number;j++)
+				System.out.printf("%3d",cost[i][j]);
+		}
+	}
+
+	void prim(int v)
+	{
+		int x=0,y=0,sum=0;
+		visit[v]=false;
+		for(int s=0;s<number-1;s++)
+		{
+			int min=99;
+			for(int i=0;i<number;i++)
+			{	
+				if(visit[i]==false)
+				{
+					for(int j=0;j<number;j++)
+					{
+						if(visit[j]==true && cost[i][j]<99 && cost[i][j]!=0)
+						{
+							min=cost[i][j];
+							x=i;						
+							y=j;
+						}
+					}
+				}
+			}
+			visit[y]=false;
+			System.out.print("\n("+x+","+y+")--------->"+min);
+			sum=sum+min;
+		}
+		System.out.print("\nMin cost is : "+sum);
+	}
+						
+	public static void main(String args[])
+	{
+		System.out.print("\nEnter the number of vertex : ");
+		int n=input.nextInt();
+		Graph G=new Graph(n);
+		G.getData();
+		G.display();
+		System.out.print("\nEnter the starting vertex : ");
+		int x=input.nextInt();
+		G.prim(x);
+		return;
+	}
+}

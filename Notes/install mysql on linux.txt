@@ -1,0 +1,14 @@
+// Install Mysql
+sudo apt install mysql-server // For ubunt, debian, kali, parrot etc.
+sudo mysql_secure_installation // May be not mandatory
+
+// Set up mysql for first time
+sudo mysql
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+FLUSH PRIVILEGES;
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'user@1234';
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+commit;

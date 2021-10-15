@@ -1,0 +1,14 @@
+n=int(input("Enter the number of elements : "))
+a=[None]*n
+for i in range(0,n):
+	a[i]=int(input("Enter an element: "))
+
+for i in range(0,n-1):
+	for j in range(i+1,n):
+		if a[i]>a[j]:
+			pos=j
+	a[i],a[pos]=a[pos],a[i]
+
+print("Elements after sorting : ")
+for i in range(0,n):
+	print(a[i],end=' ')

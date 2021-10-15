@@ -1,0 +1,76 @@
+import java.util.Scanner;
+
+class BFS
+{
+	static int arr[][],n,q[];
+	static boolean visit[];
+	static Scanner input=new Scanner(System.in);
+	static void getGraph()
+	{
+		System.out.println("Enter the number of vertices : ");
+		n=input.nextInt();
+		arr=new int[n][n];
+		visit=new boolean[n];
+		for(int i=0;i<n;i++)
+		{
+			System.out.println("Enter "+i+" TH row : ");
+			for(int j=0;j<n;j++)
+				arr[i][j]=input.nextInt();
+		}
+		for(int i=0;i<n;i++)
+			visit[i]=true;
+	}
+
+	static void display()
+	{
+		System.out.println("The adjacency matrix is : ");
+		for(int i=0;i<n;i++)
+		{
+			for(int j=0;j<n;j++)
+				System.out.printf("%4d",arr[i][j]);
+			System.out.print("\n");
+		}
+	}
+	
+	static void BFS(int x)
+	{
+		int rear=0,front=0,w,rn;
+		q=new int[n];
+		q[front]=x;
+		visit[x]=false;
+		while(front<=rear)
+		{
+			rn=rear;
+			for(int k=front;k<=rear;k++)
+			{
+				w=q[k];
+				for(int i=0;i<n;i++)
+				{
+					if(arr[w][i]==1 && visit[i]==true)
+					{
+						q[++rn]=i;
+						visit[i]=false;
+						System.out.printf("(%d,%d)",w,i);
+					}
+				}
+			}
+			front=rear+1;
+			rear=rn;
+		}
+	}
+
+	public static void main(String args[])
+	{
+		getGraph();
+		display();
+		abc: System.out.println("Enter the starting vertex : ");
+		int x=input.nextInt();
+		if(x<0 && x>n)
+		{
+			System.out.println("Wrong starting vertex");
+			return;
+		}
+		BFS(x);
+		return;
+	}
+}

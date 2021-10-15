@@ -1,0 +1,32 @@
+#include<stdio.h>
+
+int fact(int);
+int comb(int,int);
+
+int main()
+{
+	int n,i,j;
+	printf("\nEnter the number of lines : ");
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{	
+		for(j=n-i-1;j>=0;j--)
+			printf(" ");
+		for(j=0;j<=i;j++)
+			printf(" %d",comb(i,j));
+		printf("\n");
+	}
+	return 0;
+}
+
+int fact(int n)
+{
+	if(n==0)
+		return 1;
+	return n*fact(n-1);
+}
+
+int comb(int n,int r)
+{
+	return fact(n)/(fact(r)*fact(n-r));
+}

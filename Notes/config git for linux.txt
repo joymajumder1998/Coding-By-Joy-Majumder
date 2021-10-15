@@ -1,0 +1,7 @@
+git config --global user.email "joy@example.com"
+git config --global user.name "Joy Majumder"
+git config --global user.password "password" // Password or authentication token
+
+-------------------------------------------------
+
+

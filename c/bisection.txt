@@ -1,0 +1,37 @@
+#include<stdio.h>
+
+#define f(x) x*x*x-3*x+1.05
+
+int main()
+{
+	int n=0; 
+	float fa,fb,a,b,xn,fxn,x,y,z;
+	printf("\nThe equation is : x^3-9x+1");
+	printf("\nEnter the value of a and b : ");
+	scanf("%f%f",&a,&b);
+	if(f(a)*f(b) >= 0)
+		printf("\nNo root belongs between %f and %f",a,b);
+	else
+	{
+		printf("\n----------------------------------------------------------------------");
+		printf("\n  n             an             bn        xn+1=(an+bn)/2        f(xn+1)");
+		printf("\n----------------------------------------------------------------------");
+		do
+		{
+			xn=(a+b)/2;
+			fxn=f(xn);
+			printf("\n%3d%15f%15f%22f%15f",n++,a,b,xn,fxn);
+			x=a;
+			y=b;
+			z=xn;
+			if(fxn<0)
+				a=xn;
+			else
+				b=xn;
+		
+		}while(a!=x || b!=y || xn!=z);
+		printf("\n----------------------------------------------------------------------");
+		printf("\nThe root is : %f ",xn);
+	}
+	return 0;
+}

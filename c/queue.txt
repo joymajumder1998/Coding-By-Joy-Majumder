@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct node
+{
+	int info;
+	struct node *link;
+}node;
+
+node* getnode(int);
+void nqueue(int);
+int dqueue();
+void display();
+
+node *header=NULL;
+
+int main()
+{
+	int x;
+	while(1)
+	{
+		printf("\n\n1: To insert a value : ");
+		printf("\n2: To delete a value : ");
+		printf("\n3: To display : ");
+		printf("\n0: To exit");
+		printf("\nEnter your choice : ");
+		scanf("%d",&x);
+		switch(x)
+		{
+			case 1:
+				printf("\nEnter the value you want to insert : ");
+				scanf("%d",&x);
+				nqueue(x);
+				break;
+			case 2:
+				if(!header)
+				{
+					printf("\nMemory underflow : Queue is empty");
+					break;
+				}
+				printf("\nThe deleted value is : ");
+				printf("%d",dqueue());
+				break;
+			case 3:
+				printf("\nThe Queue is : ");
+				display();
+				break;
+			case 0:
+				return 0;
+			default:
+				printf("\nWrong choice");
+		}
+	}
+}
+
+node* getnode(int x)
+{
+	node *ptr=(node*)malloc(sizeof(node));
+	ptr->info=x;
+	ptr->link=NULL;
+}
+
+void nqueue(int x)
+{
+	node *ptr=header,*temp=getnode(x);
+	if(!header)
+	{
+		header=temp;
+		return;
+	}
+	while(ptr->link)
+	 	ptr=ptr->link;
+	ptr->link=temp;
+}
+
+int dqueue()
+{
+	node *ptr=header->link;
+	int x=header->info;
+	free(header);
+	header=ptr;
+	return x;	
+}		
+
+void display()
+{
+	node *ptr=header;
+	while(ptr)
+	{
+		printf(" %d",ptr->info);
+		ptr=ptr->link;
+	}
+}

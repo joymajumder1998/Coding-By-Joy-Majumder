@@ -1,0 +1,154 @@
+#include<iostream>
+
+using namespace std;
+
+class Node
+{
+	private:
+		int data;
+		Node *link;
+	public:
+		Node(int data)
+		{
+			this->data=data;
+			link=NULL;
+		}
+		friend class List;
+};
+
+class List
+{
+	private: 
+		Node *Header;
+	public:
+		List()
+		{
+			Header=NULL;
+		}
+		void insert(int);
+		void remove(int);
+		void search(int);
+		void display();
+};
+
+void List::insert(int x)
+{
+	Node *Ptr=Header,*Temp=new Node(x);
+	if(Header==NULL)
+	{
+		Header=Temp;
+		return;
+	}
+	while(Ptr->link!=NULL)
+		Ptr=Ptr->link;
+	Ptr->link=Temp;
+}
+
+void List::display()
+{
+	if(Header==NULL)
+	{
+		cout<<"\nList is empty\n";
+		return;
+	}
+	Node *Ptr=Header;
+	cout<<"\nList is : ";
+	while(Ptr!=NULL)
+	{
+		cout<<" "<<Ptr->data;
+		Ptr=Ptr->link;
+	}
+}
+
+void List::search(int x)
+{
+	Node *Ptr=Header;
+	if(Header==NULL)
+	{
+		cout<<"\nList is empty\n";
+		return;
+	}
+	while(Ptr!=NULL)
+	{
+		if(Ptr->data ==x)
+		{
+			cout<<"\nData is present";
+			return;
+		}
+		Ptr=Ptr->link;
+	}
+	if(Ptr==NULL)
+		cout<<"\nData is not present\n";
+}
+
+void List::remove(int x)
+{
+	Node *Ptr=Header,*Ptr1;
+	if(Header==NULL)
+	{
+		cout<<"\nList is empty\n";
+		return;
+	}
+	while(Ptr!=NULL)
+	{
+		if(Ptr->data ==x)
+		{
+			if(Ptr==Header)
+			{
+				Header=Header->link;
+				delete(Ptr);
+			}
+			else
+			{
+				Ptr1->link=Ptr->link;
+				delete(Ptr);
+			}
+			return;
+		}
+		Ptr1=Ptr;
+		Ptr=Ptr->link;
+	}
+	if(Ptr==NULL)
+		cout<<"\nData is not found\n";
+}
+
+int main()
+{
+	List L;
+	int ch,n;
+	while(1)
+	{
+		cout<<"\n1: To Insert";
+		cout<<"\n2: To Delete";
+		cout<<"\n3: To Search";
+		cout<<"\n4: To Display";
+		cout<<"\n0: To exit";
+		cout<<"\nEnter your choice : ";
+		cin>>ch;
+		switch(ch)
+		{
+			case 1:
+				cout<<"\nEnter the data you want to insert : ";
+				cin>>n;
+				L.insert(n);
+				break;
+			case 2:
+				cout<<"\nEnter the data you want to delete : ";
+				cin>>n;
+				L.remove(n);
+				break;
+			case 3:
+				cout<<"\nEnter the data you want to search : ";
+				cin>>n;
+				L.search(n);
+				break;
+			case 4:
+				L.display();
+				break;
+			case 0:
+				return 0;
+			default:
+				cout<<"\nWrong choice";
+		}
+	}
+}

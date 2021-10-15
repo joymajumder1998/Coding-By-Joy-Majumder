@@ -1,0 +1,17 @@
+echo Enter a number :
+re=0
+read n
+x=$n
+while [ $x -ne 0 ]
+do
+	d=`echo "$x%10"|bc`
+	p=`echo "$d*$d*$d"|bc`
+	re=`echo "$p+$re"|bc`
+	x=`echo "$x/10"|bc`
+done
+if [ $re -eq $n ]
+then
+	echo Number is Armstrong
+else
+	echo Number is not armstrong
+fi
